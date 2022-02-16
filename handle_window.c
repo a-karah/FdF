@@ -6,7 +6,7 @@
 /*   By: akarahan <akarahan@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 12:37:51 by akarahan          #+#    #+#             */
-/*   Updated: 2022/02/14 11:06:51 by akarahan         ###   ########.fr       */
+/*   Updated: 2022/02/16 18:56:42 by akarahan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	my_pixel_put(t_fdf *fdf, int x, int y, int color)
 	char	*dst;
 	int		offset;
 
-	if (!(x < 0 || y < 0 || x > WIDTH || y >= HEIGHT))
+	if (!(x <= 0 || y <= 0 || x >= WIDTH || y >= HEIGHT))
 	{
 		offset = ((y * fdf->img.line_len) + (x * (fdf->img.bpp / 8)));
 		dst = fdf->img.addr + offset;
