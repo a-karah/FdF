@@ -25,6 +25,9 @@ RM = rm -rf
 
 all: $(NAME)
 
+debug: CFLAGS += -fsanitize=address -g
+debug: $(NAME)
+
 $(OBJS_FOLDER):
 	@mkdir -p $(OBJS_FOLDER)
 
@@ -48,4 +51,6 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re, test
+dre: fclean debug
+
+.PHONY: all, clean, fclean, re, test, debug, dre

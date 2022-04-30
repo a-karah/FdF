@@ -1,5 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
+DFLAG =
 
 NAME = fdf
 INCLUDES = -Iincludes
@@ -31,11 +32,12 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 debug: CFLAGS += -fsanitize=address -g
+debug: DFLAG += debug
 debug: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(MAKE) -sC $(MLX_DIR)
-	@$(MAKE) -sC $(LIBFT_DIR)
+	@$(MAKE) -sC $(LIBFT_DIR) $(DFLAG)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -lft $(MLX_FLAGS)
 
 %.o: %.c
