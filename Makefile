@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra
 
 NAME = fdf
 INCLUDES = -Iincludes
@@ -11,7 +11,7 @@ MLX_DIR = minilibx_macos
 MLX_FLAGS = -framework OpenGL -framework AppKit
 else
 MLX_DIR = minilibx-linux
-MLX_FLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+MLX_FLAGS = -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 endif
 
 SRCS = main.c \
@@ -29,6 +29,9 @@ SRCS = main.c \
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
+
+debug: CFLAGS += -fsanitize=address -g
+debug: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(MAKE) -sC $(MLX_DIR)
@@ -49,4 +52,6 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re
+dre: debug all
+
+.PHONY: all, debug, clean, fclean, re, dre
