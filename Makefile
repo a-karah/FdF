@@ -1,6 +1,5 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-DFLAG =
 
 NAME = fdf
 INCLUDES = -Iincludes
@@ -8,11 +7,11 @@ LIBFT_DIR = libft
 
 UNAME = $(shell uname)
 ifeq ($(UNAME), Darwin)
-MLX_DIR = minilibx_macos
-MLX_FLAGS = -framework OpenGL -framework AppKit
+	MLX_DIR = minilibx_macos
+	MLX_FLAGS = -framework OpenGL -framework AppKit
 else
-MLX_DIR = minilibx-linux
-MLX_FLAGS = -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+	MLX_DIR = minilibx-linux
+	MLX_FLAGS = -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 endif
 
 SRCS = main.c \
@@ -29,11 +28,13 @@ SRCS = main.c \
 		handle_window.c
 OBJS = $(SRCS:.c=.o)
 
-all: $(NAME)
+debug: CFLAGS += -g
+debug: all
 
-debug: CFLAGS += -fsanitize=address -g
-debug: DFLAG += debug
-debug: $(NAME)
+address: CFLAGS += -fsanitize=address -g
+address: re
+
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(MAKE) -sC $(MLX_DIR)
@@ -56,4 +57,4 @@ re: fclean all
 
 dre: debug all
 
-.PHONY: all, debug, clean, fclean, re, dre
+.PHONY: all, debug, clean, fclean, re, dre, address
