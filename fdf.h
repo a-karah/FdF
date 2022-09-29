@@ -6,7 +6,7 @@
 /*   By: akarahan <akarahan@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 12:37:11 by akarahan          #+#    #+#             */
-/*   Updated: 2022/02/14 11:23:08 by akarahan         ###   ########.fr       */
+/*   Updated: 2022/09/29 14:48:18 by akarahan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <math.h>
 # include <errno.h>
 # include <string.h>
-# include "./minilibx_macos/mlx.h"
+# include <mlx.h>
 # include "./libft/includes/libft.h"
 
 # define STDIN 0
@@ -29,7 +29,8 @@
 # define WIDTH 1024
 # define HEIGHT 780
 
-enum {
+# ifdef __APPLE__
+enum e_keys {
 	ON_DESTROY = 17,
 	ESC = 53,
 	UP = 126,
@@ -54,6 +55,33 @@ enum {
 	AYU_B = 0x39bae6,
 	AYU_Y = 0xffb454
 };
+#elif __linux__
+enum e_keys{
+	ON_DESTROY = 17,
+	ESC = 65307,
+	UP = 126,
+	DOWN = 125,
+	LEFT = 65361,
+	RIGHT = 65363,
+	PLUS = 27,
+	MINUS = 24,
+	ZERO = 29,
+	Z_KEY = 6,
+	X_KEY = 7,
+	Q_KEY = 12,
+	W_KEY = 119,
+	E_KEY = 14,
+	I_KEY = 34,
+	KEY_1 = 18,
+	KEY_2 = 19,
+	KEY_3 = 20,
+	KEY_4 = 21,
+	KEY_5 = 22,
+	KEY_6 = 23,
+	AYU_B = 0x39bae6,
+	AYU_Y = 0xffb454
+};
+#endif
 
 typedef struct s_line
 {
