@@ -3,18 +3,17 @@ CFLAGS = -Wall -Werror -Wextra -g
 UNAME = $(shell uname)
 
 ifeq ($(UNAME), Linux)
-	MLX_DIR = minilibx_linux
+	MLX_DIR = $(HOME)/minilibx_linux
 	MLX_FLAGS = -L/usr/bin/lib/ -lXext -lX11 -lm
 endif
 
 ifeq ($(UNAME), Darwin)
 	MLX_DIR = $(HOME)/minilibx_macos
 	MLX_FLAGS = -framework OpenGL -framework AppKit
-	MLX_INCLUDE = -I$(HOME)/minilibx_macos
 endif
 
 NAME = fdf
-INCLUDES = -Iincludes
+INCLUDES = -Iincludes -I$(MLX_DIR)
 LIBFT_DIR = libft
 
 SRCS = main.c \
@@ -39,7 +38,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -lft $(MLX_FLAGS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) $(MLX_INCLUDE)
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
 clean:
 	@$(MAKE) -sC $(MLX_DIR) clean
