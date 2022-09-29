@@ -3,7 +3,7 @@ CFLAGS = -Wall -Werror -Wextra -g
 UNAME = $(shell uname)
 
 ifeq ($(UNAME), Linux)
-	MLX_DIR = $(HOME)/minilibx_linux
+	MLX_DIR = $(HOME)/minilibx-linux
 	MLX_FLAGS = -L/usr/bin/lib/ -lXext -lX11 -lm
 endif
 
