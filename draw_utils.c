@@ -6,7 +6,7 @@
 /*   By: akarahan <akarahan@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 11:40:01 by akarahan          #+#    #+#             */
-/*   Updated: 2022/02/11 22:54:03 by akarahan         ###   ########.fr       */
+/*   Updated: 2023/02/10 15:03:22 by akarahan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	rotate_xyz(t_fdf *fdf, float *x, float *y, int *z)
 	*y = tmp_y * cos(fdf->alpha) + tmp_z * sin(fdf->alpha);
 	*z = (int)(-tmp_y * sin(fdf->alpha) + tmp_z * cos(fdf->alpha));
 	tmp_z = *z;
-	*x = tmp_x * cos(fdf->beta) - tmp_z * sin(fdf->beta);
+	*x = tmp_x * cos(fdf->beta) + tmp_z * sin(fdf->beta);
 	*z = (int)(-tmp_x * sin(fdf->beta) + tmp_z * cos(fdf->beta));
 	tmp_x = *x;
 	tmp_y = *y;
